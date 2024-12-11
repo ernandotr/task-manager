@@ -28,6 +28,10 @@ public class TaskService {
         return toResponse(task);
     }
 
+    public void deleteTask(Integer taskId) {
+        taskRepository.deleteById(taskId);
+    }
+
     private Task toEntity(TaskRequest request) {
         Task task = new Task();
         task.setDescription(request.description());

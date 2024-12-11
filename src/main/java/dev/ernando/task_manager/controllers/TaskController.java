@@ -32,4 +32,10 @@ public class TaskController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTask(@PathVariable Integer id){
+        taskService.deleteTask(id);
+        return ResponseEntity.noContent().build();
+    }
 }
