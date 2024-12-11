@@ -1,12 +1,12 @@
 package dev.ernando.task_manager.controllers;
 
+import dev.ernando.task_manager.requests.TaskRequest;
 import dev.ernando.task_manager.responses.StatusTaskEnum;
 import dev.ernando.task_manager.responses.TaskResponse;
 import dev.ernando.task_manager.services.TaskService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +24,12 @@ public class TaskController {
     public ResponseEntity<List<TaskResponse>> getAllTasks() {
         var tasks = taskService.getAllTasks();
         return ResponseEntity.ok(tasks);
+    }
+
+    @PostMapping
+    public ResponseEntity<TaskResponse> createTask(@RequestBody TaskRequest taskRequest) {
+        TaskResponse response = taskService.createTask(taskRequest);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }
