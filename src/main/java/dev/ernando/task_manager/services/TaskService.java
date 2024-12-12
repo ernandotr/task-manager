@@ -29,6 +29,13 @@ public class TaskService {
         return toResponse(task);
     }
 
+    public void updateTask(TaskRequest request, Integer id) {
+        Task task = taskRepository.findById(id).orElseThrow(TaskNotFoundException::new);
+        task.setName(request.name());
+        task.setDescription(request.description());
+        taskRepository.save(task);
+    }
+
     public void deleteTask(Integer taskId) {
         taskRepository.deleteById(taskId);
     }

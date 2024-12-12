@@ -33,6 +33,12 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<Void> updateTask(@RequestBody TaskRequest taskRequest, @PathVariable Integer id) {
+        taskService.updateTask(taskRequest, id);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("{id}")
     public ResponseEntity<TaskResponse> findById(@PathVariable Integer id) {
         var task = taskService.findById(id);
