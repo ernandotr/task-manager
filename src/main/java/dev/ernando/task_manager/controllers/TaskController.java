@@ -33,6 +33,12 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<TaskResponse> findById(@PathVariable Integer id) {
+        var task = taskService.findById(id);
+        return ResponseEntity.ok(task);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable Integer id){
         taskService.deleteTask(id);

@@ -1,6 +1,7 @@
 package dev.ernando.task_manager.services;
 
 import dev.ernando.task_manager.TaskRepository;
+import dev.ernando.task_manager.exceptions.TaskNotFoundException;
 import dev.ernando.task_manager.model.Task;
 import dev.ernando.task_manager.requests.TaskRequest;
 import dev.ernando.task_manager.responses.StatusTaskEnum;
@@ -30,6 +31,10 @@ public class TaskService {
 
     public void deleteTask(Integer taskId) {
         taskRepository.deleteById(taskId);
+    }
+
+    public TaskResponse findById(Integer id) {
+        return taskRepository.findById(id).map(this::toResponse).orElseThrow(TaskNotFoundException::new);
     }
 
     private Task toEntity(TaskRequest request) {
